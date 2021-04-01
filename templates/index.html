@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>URNIK NEKINEKI</title>
+{% endblock %}
+
+{% block body %}
+    <table>
+        {% for day in classroom_schedule %}
+            <tr>
+                {% for hour in day.hours %}
+                    <td>
+                        {{ hour.grade }}
+                        <br>
+                        {{ hour.professor }}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <table>
+        {% if grade_schedule != None %}
+        {% for day in grade_schedule %}
+            <tr>
+                {% for hour in day.hours %}
+                    <td>
+                        {{ hour.subject }}
+                        <br>
+                        {{ hour.professor }}
+                        <br>
+                        {{ hour.classroom }}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+{% endblock %}

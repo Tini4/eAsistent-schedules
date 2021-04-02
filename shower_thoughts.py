@@ -19,19 +19,17 @@ headers = {
 }
 params = (
     ('count', '100'),
-    ('limit', '100')
+    ('limit', '1000')
 )
 
 shower_thoughts = []
 
-response = requests.get('https://www.reddit.com/r/Showerthoughts/top/.json',
-                        headers=headers,
-                        params=params
-                        ).json()["data"]["children"]
 
-
-for r in response:
-    shower_thoughts.append(r["data"]["title"])
-
-print(shower_thoughts)
-print(len(shower_thoughts))
+def get_shower_thoughts():
+    response = requests.get('https://www.reddit.com/r/Showerthoughts/top/.json',
+                            headers=headers,
+                            params=params
+                            ).json()["data"]["children"]
+    for r in response:
+        shower_thoughts.append(r["data"]["title"])
+    return shower_thoughts

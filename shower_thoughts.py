@@ -18,14 +18,14 @@ headers = {
     'referer': 'https://www.reddit.com/r/Showerthoughts/top/.json?count=5',
 }
 params = (
-    ('count', '100'),
-    ('limit', '5000')
+    ('t', 'day'),
+    ('count', '0'),
+    ('limit', '100')
 )
-
-shower_thoughts = []
 
 
 def get_shower_thoughts():
+    shower_thoughts = []
     response = requests.get('https://www.reddit.com/r/Showerthoughts/top/.json',
                             headers=headers,
                             params=params

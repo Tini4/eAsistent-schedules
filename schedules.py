@@ -13,6 +13,7 @@ grade_schedule = []
 hours_schedule = []
 
 
+
 class Day:
     def __init__(self, name):
         self.name = name
@@ -210,9 +211,6 @@ def get_grade_schedule():
             tmp = None
             # skip the 1st row (has hours) and go over the work week only
             if j == 0:
-                hour_end_raw = column.find('div', attrs={'class': 'text10 gray'}).get_text().split(' - ')[1]
-                hour_end = int(hour_end_raw.split(':')[0]) * 60 + int(hour_end_raw.split(':')[1])
-                hours_schedule.append(hour_end)
                 continue
             if j > 5:
                 break

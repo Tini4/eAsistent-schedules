@@ -8,6 +8,7 @@ app = Flask('app')
 # classroom_schedule = get_classroom_schedule()
 # grade_schedule = get_grade_schedule()
 shower_thoughts = get_shower_thoughts()
+print(shower_thoughts)
 
 
 @app.route('/', methods=['POST', 'GET'])

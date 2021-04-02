@@ -1,6 +1,7 @@
 from schedules import init, get_classroom_schedule, get_grade_schedule
 from flask import Flask, render_template
 from shower_thoughts import get_shower_thoughts
+import random
 
 app = Flask('app')
 # init()
@@ -14,7 +15,7 @@ def index():
     return render_template('index.html',
                            # classroom_schedule=classroom_schedule,
                            # grade_schedule=grade_schedule,
-                           shower_thoughts=shower_thoughts
+                           shower_thought=random.choice(shower_thoughts)
                            )
 
 

@@ -19,7 +19,7 @@ headers = {
 }
 params = (
     ('count', '100'),
-    ('limit', '1000')
+    ('limit', '5000')
 )
 
 shower_thoughts = []

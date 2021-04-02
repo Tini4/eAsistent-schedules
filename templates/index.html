@@ -39,12 +39,10 @@
     </table>
     <div>
         <h1>Thoughts</h1>
-        {% if shower_thoughts != None %}
-        {% for thought in shower_thoughts %}
+        {% if shower_thought != None %}
             <p>
-                {{ thought }}
+                {{ shower_thought }}
             </p>
-        {% endfor %}
         {% endif %}
     </div>
 {% endblock %}

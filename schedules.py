@@ -13,7 +13,6 @@ grade_schedule = []
 hours_schedule = []
 
 
-
 class Day:
     def __init__(self, name):
         self.name = name
@@ -43,6 +42,11 @@ class HourGrade:
 
 def init():
     global school, obj
+    classrooms = {}
+    grades = {}
+    classroom_schedule = []
+    grade_schedule = []
+    hours_schedule = []
     # read file
     with open('info.json', 'r') as my_file:
         data = my_file.read()

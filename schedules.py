@@ -162,31 +162,33 @@ def get_classroom_schedule():
             # save into schedule[day].hours
             classroom_schedule[j - 1].hours.append(tmp)
             # extract the the double hours
-            blocks = column.find_all('div', attrs={'class': 'ni_prvi'})
-            for block in blocks:
-                # get the grades and professors that teach them
-                grade_raw = block.find('td', attrs={'class': 'text14 bold'})
-                professor_raw = block.find('div', attrs={'class': 'text11'})
-                # get the place where the schedule is saved
-                tmp = classroom_schedule[j - 1].hours
-                l_t = len(tmp)
-                grade_new = f'{tmp[l_t - 1].grade}, {grade_raw.get_text().strip().replace(" ", "")}' if \
-                    tmp[l_t - 1].grade != grade_raw.get_text().strip().replace(" ", "") else tmp[l_t - 1].grade
-                professor_new = f'{tmp[l_t - 1].professor}, {professor_raw.get_text().strip()}' if \
-                    tmp[l_t - 1].professor != professor_raw.get_text().strip() else tmp[l_t - 1].professor
-                # make new tmp
-                tmp_new = HourClassroom(
-                    # keep the times the same
-                    tmp[l_t - 1].hour,
-                    tmp[l_t - 1].year,
-                    tmp[l_t - 1].month,
-                    tmp[l_t - 1].day,
-                    # add grades and professors
-                    grade_new,
-                    professor_new
-                )
-                # save into schedule[day].hours[last_hour_saved]
-                classroom_schedule[j - 1].hours[l_t - 1] = tmp_new
+            not_first = column.find('div', attrs={'class': 'ni_prvi'})
+            if not_first:
+                blocks = not_first.find_all('div', attrs={'class': 'ednevnik-seznam_ur_teden-urnik'})
+                for block in blocks:
+                    # get the grades and professors that teach them
+                    grade_raw = block.find('td', attrs={'class': 'text14 bold'})
+                    professor_raw = block.find('div', attrs={'class': 'text11'})
+                    # get the place where the schedule is saved
+                    tmp = classroom_schedule[j - 1].hours
+                    l_t = len(tmp)
+                    grade_new = f'{tmp[l_t - 1].grade}, {grade_raw.get_text().strip().replace(" ", "")}' if \
+                        tmp[l_t - 1].grade != grade_raw.get_text().strip().replace(" ", "") else tmp[l_t - 1].grade
+                    professor_new = f'{tmp[l_t - 1].professor}, {professor_raw.get_text().strip()}' if \
+                        tmp[l_t - 1].professor != professor_raw.get_text().strip() else tmp[l_t - 1].professor
+                    # make new tmp
+                    tmp_new = HourClassroom(
+                        # keep the times the same
+                        tmp[l_t - 1].hour,
+                        tmp[l_t - 1].year,
+                        tmp[l_t - 1].month,
+                        tmp[l_t - 1].day,
+                        # add grades and professors
+                        grade_new,
+                        professor_new
+                    )
+                    # save into schedule[day].hours[last_hour_saved]
+                    classroom_schedule[j - 1].hours[l_t - 1] = tmp_new
     return classroom_schedule
 
 
@@ -239,35 +241,37 @@ def get_grade_schedule():
             # save into schedule[day].hours
             grade_schedule[j - 1].hours.append(tmp)
             # extract the the double hours
-            blocks = column.find_all('div', attrs={'class': 'ni_prvi'})
-            for block in blocks:
-                # get the subjects and professors that teach them, and rooms they are in
-                subject_raw = block.find('td', attrs={'class': 'text14 bold'})
-                info_raw = block.find('div', attrs={'class': 'text11'})
-                professor = info_raw.get_text().strip().split(', ')[0]
-                classroom = info_raw.get_text().strip().split(', ')[1]
-                # get the place where the schedule is saved
-                tmp = grade_schedule[j - 1].hours
-                l_t = len(tmp)
-                # if content is the same leave as is, else put together new content
-                subject_new = f'{tmp[l_t - 1].subject}, {subject_raw.get_text().strip().replace(" ", "")}' if \
-                    tmp[l_t - 1].subject != subject_raw.get_text().strip().replace(" ", "") else tmp[l_t - 1].subject
-                professor_new = f'{tmp[l_t - 1].professor}, {professor}' if \
-                    tmp[l_t - 1].professor != professor else tmp[l_t - 1].professor
-                classroom_new = f'{tmp[l_t - 1].classroom}, {classroom}' if \
-                    tmp[l_t - 1].classroom != classroom else tmp[l_t - 1].classroom
-                # make new tmp
-                tmp_new = HourGrade(
-                    # keep the times the same
-                    tmp[l_t - 1].hour,
-                    tmp[l_t - 1].year,
-                    tmp[l_t - 1].month,
-                    tmp[l_t - 1].day,
-                    # add grades, professors and classrooms
-                    subject_new,
-                    professor_new,
-                    classroom_new
-                )
-                # save into schedule[day].hours[last_hour_saved]
-                grade_schedule[j - 1].hours[l_t - 1] = tmp_new
+            not_first = column.find('div', attrs={'class': 'ni_prvi'})
+            if not_first:
+                blocks = not_first.find_all('div', attrs={'class': 'ednevnik-seznam_ur_teden-urnik'})
+                for block in blocks:
+                    # get the subjects and professors that teach them, and rooms they are in
+                    subject_raw = block.find('td', attrs={'class': 'text14 bold'})
+                    info_raw = block.find('div', attrs={'class': 'text11'})
+                    professor = info_raw.get_text().strip().split(', ')[0]
+                    classroom = info_raw.get_text().strip().split(', ')[1]
+                    # get the place where the schedule is saved
+                    tmp = grade_schedule[j - 1].hours
+                    l_t = len(tmp)
+                    # if content is the same leave as is, else put together new content
+                    subject_new = f'{tmp[l_t - 1].subject}, {subject_raw.get_text().strip().replace(" ", "")}' if \
+                        tmp[l_t - 1].subject != subject_raw.get_text().strip().replace(" ", "") else tmp[l_t - 1].subject
+                    professor_new = f'{tmp[l_t - 1].professor}, {professor}' if \
+                        tmp[l_t - 1].professor != professor else tmp[l_t - 1].professor
+                    classroom_new = f'{tmp[l_t - 1].classroom}, {classroom}' if \
+                        tmp[l_t - 1].classroom != classroom else tmp[l_t - 1].classroom
+                    # make new tmp
+                    tmp_new = HourGrade(
+                        # keep the times the same
+                        tmp[l_t - 1].hour,
+                        tmp[l_t - 1].year,
+                        tmp[l_t - 1].month,
+                        tmp[l_t - 1].day,
+                        # add grades, professors and classrooms
+                        subject_new,
+                        professor_new,
+                        classroom_new
+                    )
+                    # save into schedule[day].hours[last_hour_saved]
+                    grade_schedule[j - 1].hours[l_t - 1] = tmp_new
     return grade_schedule

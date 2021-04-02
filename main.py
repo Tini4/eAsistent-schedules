@@ -3,17 +3,17 @@ from flask import Flask, render_template
 from shower_thoughts import get_shower_thoughts
 
 app = Flask('app')
-init()
-classroom_schedule = get_classroom_schedule()
-grade_schedule = get_grade_schedule()
+# init()
+# classroom_schedule = get_classroom_schedule()
+# grade_schedule = get_grade_schedule()
 shower_thoughts = get_shower_thoughts()
 
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     return render_template('index.html',
-                           classroom_schedule=classroom_schedule,
-                           grade_schedule=grade_schedule,
+                           # classroom_schedule=classroom_schedule,
+                           # grade_schedule=grade_schedule,
                            shower_thoughts=shower_thoughts
                            )
 

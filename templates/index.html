@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>URNIK NEKINEKI</title>
+    <title>URA PLUSPLUS</title>
 {% endblock %}
 
 {% block body %}
     <table>
+        {% if classroom_schedule != None %}
         {% for day in classroom_schedule %}
             <tr>
                 {% for hour in day.hours %}
@@ -17,6 +18,7 @@
                 {% endfor %}
             </tr>
         {% endfor %}
+        {% endif %}
     </table>
     <table>
         {% if grade_schedule != None %}
@@ -35,4 +37,14 @@
         {% endfor %}
         {% endif %}
     </table>
+    <div>
+        <h1>Thoughts</h1>
+        {% if shower_thoughts != None %}
+        {% for thought in shower_thoughts %}
+            <p>
+                {{ thought }}
+            </p>
+        {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}
